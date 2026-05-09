@@ -3,10 +3,29 @@ import { Button, FieldError, Input, Label, ListBox, TextArea, TextField, Select 
 import React from 'react';
 
 const AddDestinationPage = () => {
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const destination = Object.fromEntries(formData.entries());
+        console.log('New Destination:', destination);
+        const res = await fetch('http://localhost:5000/destination', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(destination)
+        })
+
+        const data = await res.json();
+        console.log('Response from server:', data);
+    }
+
     return (
         <div>
             <h1 className='font-bold text-3xl my-10 w-7/12 mx-auto'>Add New Travel Package</h1>
             <form
+                onSubmit={onSubmit}
                 className="p-10 max-w-[800px] mx-auto space-y-8"
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
