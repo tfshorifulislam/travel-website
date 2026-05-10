@@ -1,8 +1,11 @@
+import { DeleteAlert } from '@/components/DeleteAlert';
 import DestinationsCard from '@/components/DestinationsCard';
+import { ModalForm } from '@/components/editModals';
+import { Button } from '@heroui/react';
 import React from 'react';
 
 const DestinationDetailsPage = async ({ params }) => {
-    const {id } = await params;
+    const { id } = await params;
     console.log('Destination ID:', id);
     const res = await fetch(`http://localhost:5000/destination/${id}`);
     const destination = await res.json();
@@ -10,6 +13,10 @@ const DestinationDetailsPage = async ({ params }) => {
     return (
         <div>
             <h1>Destination Details</h1>
+            <div className="flex gap-4 px-4 py-10 mx-auto max-w-4xl">
+                <ModalForm destination={destination} />
+                <DeleteAlert destination={destination} />
+            </div>
             <div className="px-4 py-10 mx-auto max-w-4xl">
                 {
                     destination ? (
