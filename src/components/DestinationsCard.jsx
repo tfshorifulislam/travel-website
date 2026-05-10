@@ -1,4 +1,6 @@
+import { Button } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const DestinationsCard = ({ destination }) => {
@@ -35,9 +37,11 @@ const DestinationsCard = ({ destination }) => {
 
                 {/* Button */}
                 <div className="mt-4 flex justify-between items-center">
-                    <button className="text-sm font-medium text-blue-600 hover:text-blue-800 transition">
-                        Explore →
-                    </button>
+                    <Link href={`/destinations/${destination._id}`}>
+                        <Button variant="outline" className="text-sm font-medium text-blue-600 hover:text-blue-800 transition">
+                            Book Now
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
